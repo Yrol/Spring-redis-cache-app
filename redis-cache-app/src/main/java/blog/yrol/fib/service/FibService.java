@@ -32,7 +32,7 @@ public class FibService {
 
 
     /**
-     * Scheduled cache evict
+     * Scheduled cache evict (in every 10 seconds)
      * **/
     @Scheduled(fixedRate = 10000)
     @CacheEvict(value = "math:fib", allEntries = true)
