@@ -33,6 +33,7 @@ public class FibService {
 
     /**
      * Scheduled cache evict (in every 10 seconds)
+     * This will expire the entire Hash (not individual keys)
      * **/
     @Scheduled(fixedRate = 10000)
     @CacheEvict(value = "math:fib", allEntries = true)
