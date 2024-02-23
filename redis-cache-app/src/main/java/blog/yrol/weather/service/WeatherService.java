@@ -14,7 +14,7 @@ public class WeatherService {
     private ExternalServiceClient client;
 
     /**
-     * By default, return 0 if the scheduler has not assign values to the interger from 0 to 5
+     * By default, return 0 if the scheduler has not assign values to the integer from 0 to 5
      * **/
     @Cacheable("weather")
     public int getInfo(int zip) {

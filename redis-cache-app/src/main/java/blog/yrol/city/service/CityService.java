@@ -31,13 +31,14 @@ public class CityService {
      * Building the pipeline for the following
      * 1. Attempting to get values from cache
      * 2. If cache is empty get from DB / source, then save that in cache and return
+     * 3. Expiring each key in 20 seconds
      * **/
     public Mono<City> getCity(final String zipCode) {
-        return this.cityMap.get(zipCode)
-                .switchIfEmpty(this.cityClient.getCity(zipCode) // attempting to get value from cache
-//                        .flatMap(c -> this.cityMap.fastPut(zipCode, c // without expiration
-                        .flatMap(c -> this.cityMap.fastPut(zipCode, c,20, TimeUnit.SECONDS // with expiration (in 20 seconds)
-                        ).thenReturn(c)) // get value from DB / source and save it in cache, then return it.
+        return this.cityMap.get(zipCode) // attempting to get value from cache
+                .switchIfEmpty(this.cityClient.getCity(zipCode)  // if empty get city from external service
+//                        .flatMap(c -> this.cityMap.fastPut(zipCode, c // save city info to cache without expiration
+                        .flatMap(c -> this.cityMap.fastPut(zipCode, c,20, TimeUnit.SECONDS // save city info to cache with expiration (in 20 seconds)
+                        ).thenReturn(c))
                 );
     }
 }
