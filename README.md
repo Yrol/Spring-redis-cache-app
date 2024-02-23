@@ -30,8 +30,9 @@ The caching in the above request is determined by the number in the URL. Therefo
 
 
 ### Application 2: Temperature display app
-A temperature display application that simulates fetching data from an external source and store in Redis for a fixed number of values.
-Similar to a weather app, these values will be updated every 10 seconds. The application is as below.
+A temperature display application that simulates fetching data from an external source automatically and store them in Redis for later retrieval. 
+In this example it'll assign a random value to the integers range from 1 - 5 treated as states or cities.
+Similar to a weather app, these values will be updated every 10 seconds. The application architecture is as below.
 ![](https://i.imgur.com/JCLRzEL.png)
 
 As shown above when user makes an API call, the service will fetch the frequently updated vales from the Redis 
